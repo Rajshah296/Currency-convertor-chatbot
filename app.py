@@ -9,7 +9,7 @@ def index():
     data = request.get_json()
     source_currency = data['queryResult']['parameters']['unit-currency']['currency']
     amount = data['queryResult']['parameters']['unit-currency']['amount']
-    target_currency = data['queryResult']['parameters']['currency-name']
+    target_currency = data['queryResult']['parameters']['currency-name'][0]
 
 
     cf = fetch_conversion_factor(source_currency,target_currency)
@@ -28,7 +28,7 @@ def fetch_conversion_factor(source,target):
         Returns floating-point value.
     """
     client = currencyapicom.Client('cur_live_n0VkK3qX1ft6LiITu09ItilBS8rj9PZiMfMgX8D5')
-    exch_rate = client.latest(source,currencies=target)
+    exch_rate = client.latest(source,currencies=[target])
     return exch_rate['data'][f'{target}']['value']
 
 if __name__ == "__main__":
