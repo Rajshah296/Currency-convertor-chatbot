@@ -9,7 +9,7 @@ def index():
     data = request.get_json()
     source_currency = data['queryResult']['parameters']['unit-currency']['currency']
     amount = data['queryResult']['parameters']['unit-currency']['amount']
-    target_currency = data['queryResult']['parameters']['currency-name'][0]
+    target_currency = data['queryResult']['parameters']['currency-name']
 
 
     cf = fetch_conversion_factor(source_currency,target_currency)
